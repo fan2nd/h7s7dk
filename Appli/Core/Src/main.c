@@ -24,7 +24,6 @@
 #include "i2c.h"
 #include "i2s.h"
 #include "ltdc.h"
-#include "sdmmc.h"
 #include "spi.h"
 #include "usart.h"
 #include "ucpd.h"
@@ -69,9 +68,9 @@
 /* USER CODE END 0 */
 
 /**
- * @brief  The application entry point.
- * @retval int
- */
+  * @brief  The application entry point.
+  * @retval int
+  */
 int main(void)
 {
 
@@ -104,12 +103,10 @@ int main(void)
   MX_I2C1_Init();
   MX_I2S6_Init();
   MX_LTDC_Init();
-  // MX_SDMMC1_SD_Init();
   MX_SPI4_Init();
   MX_UART4_Init();
-  // MX_UCPD1_Init();
-  // MX_USB_OTG_FS_PCD_Init();
-  // MX_USB_OTG_HS_PCD_Init();
+  MX_UCPD1_Init();
+  MX_USB_OTG_FS_PCD_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -132,9 +129,9 @@ int main(void)
 /* USER CODE END 4 */
 
 /**
- * @brief  This function is executed in case of error occurrence.
- * @retval None
- */
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
@@ -147,12 +144,12 @@ void Error_Handler(void)
 }
 #ifdef USE_FULL_ASSERT
 /**
- * @brief  Reports the name of the source file and the source line number
- *         where the assert_param error has occurred.
- * @param  file: pointer to the source file name
- * @param  line: assert_param error line source number
- * @retval None
- */
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */

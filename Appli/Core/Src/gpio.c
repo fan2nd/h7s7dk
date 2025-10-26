@@ -33,8 +33,16 @@
 /* USER CODE END 1 */
 
 /** Configure pins
+     PM6   ------> USB_OTG_HS_DP
+     PD2   ------> SDMMC1_CMD
      PE2   ------> ADF1_CCK0
      PD7   ------> ETH_RMII_REF_CLK
+     PM5   ------> USB_OTG_HS_DM
+     PC10   ------> SDMMC1_D2
+     PC11   ------> SDMMC1_D3
+     PC12   ------> SDMMC1_CK
+     PC8   ------> SDMMC1_D0
+     PC9   ------> SDMMC1_D1
      PG11   ------> ETH_RMII_TX_EN
      PC1   ------> ETH_MDC
      PA2   ------> ETH_MDIO
@@ -67,12 +75,28 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOO, LD1_Pin|LD2_Pin, GPIO_PIN_RESET);
 
+  /*Configure GPIO pins : USB1_HS_P_Pin USB1_HS_N_Pin */
+  GPIO_InitStruct.Pin = USB1_HS_P_Pin|USB1_HS_N_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF10_OTG_HS;
+  HAL_GPIO_Init(GPIOM, &GPIO_InitStruct);
+
   /*Configure GPIO pins : LD4_Pin LD3_Pin */
   GPIO_InitStruct.Pin = LD4_Pin|LD3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOM, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : SD_CMD_Pin */
+  GPIO_InitStruct.Pin = SD_CMD_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct.Alternate = GPIO_AF11_SDMMC1;
+  HAL_GPIO_Init(SD_CMD_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : MIC_CK_Pin */
   GPIO_InitStruct.Pin = MIC_CK_Pin;
@@ -89,6 +113,22 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.Alternate = GPIO_AF4_ETH;
   HAL_GPIO_Init(RMII_REF_CLK_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : SD_D2_Pin */
+  GPIO_InitStruct.Pin = SD_D2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct.Alternate = GPIO_AF12_SDMMC1;
+  HAL_GPIO_Init(SD_D2_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : SD_D3_Pin SD_CK_Pin SD_D0_Pin SD_D1_Pin */
+  GPIO_InitStruct.Pin = SD_D3_Pin|SD_CK_Pin|SD_D0_Pin|SD_D1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct.Alternate = GPIO_AF11_SDMMC1;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : RMII_TX_EN_Pin */
   GPIO_InitStruct.Pin = RMII_TX_EN_Pin;
